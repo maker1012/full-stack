@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: backend
+    env: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn backend.wsgi:application
+    workingDir: backend
+
+  - type: web
+    name: frontend
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    workingDir: frontend
